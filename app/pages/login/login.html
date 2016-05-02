@@ -1,0 +1,24 @@
+<ion-content class="login">
+    <img block src="img/blue-name.png">
+    <ion-list>
+        <ion-item>
+            <ion-label floating>Company</ion-label>
+            <ion-input type="text" value="" [(ngModel)]="user.company"></ion-input>
+        </ion-item>
+        
+        <ion-item>
+            <ion-label floating>Username</ion-label>
+            <ion-input type="text" value="" [(ngModel)]="user.username"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Password</ion-label>
+            <ion-input type="password" value="" [(ngModel)]="user.password"></ion-input>
+        </ion-item>
+
+    </ion-list>
+
+    <div padding>
+        <button block (click)="login($event)">Sign In</button>
+    </div>
+</ion-content>

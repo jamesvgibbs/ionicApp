@@ -1,0 +1,29 @@
+<ion-navbar *navbar hideBackButton class="show-navbar">
+  <ion-title>Digital Fleet</ion-title>
+</ion-navbar>
+
+<ion-content class="welcome-page">
+
+  <ion-slides pager>
+    <ion-slide *ngFor="#slide of slides">
+      <ion-toolbar>
+        <ion-buttons end>
+          <button (click)="skip($event)">Skip</button>
+        </ion-buttons>
+      </ion-toolbar>
+      <img [src]="slide.image" class="slide-image"/>
+      <h2 class="slide-title" [innerHTML]="slide.title"></h2>
+      <p [innerHTML]="slide.description"></p>
+    </ion-slide>
+    <ion-slide>
+      <ion-toolbar>
+      </ion-toolbar>
+      <img src="img/ica-slidebox-img-1.png" class="slide-image"/>
+      <h2 class="slide-title">Ready to Start?</h2>
+      <button large clear (click)="continue($event)">
+        Continue
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
