@@ -40,5 +40,5 @@
     "android"
   ],
   "name": "dfapp",
-  "description": "dfApp: An Ionic project"
+  "description": "This is a prototype application for a mobile implementation of the Digital Fleet Web Portal mixed with device tracking functionality."
 }

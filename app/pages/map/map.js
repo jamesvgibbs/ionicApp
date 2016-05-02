@@ -1,4 +1,5 @@
-import {Page, Platform, NavController} from 'ionic-angular';
+import {Page, Platform, Modal, NavController} from 'ionic-angular';
+import {MapSettingsPage} from '../map-settings/map-settings';
 import {ConnectivityService} from '../../providers/connectivity-service/connectivity-service';
 import {SpinnerDialog} from 'ionic-native';
 
@@ -11,6 +12,7 @@ export class MapPage {
   }
   
   constructor(platform, nav, connectivityService) {
+    console.log('map');
       this.platform = platform;
       this.nav = nav;
       this.connectivity = connectivityService;
@@ -19,6 +21,7 @@ export class MapPage {
       this.marker = null;
       this.mapInitialised = false;
       this.apiKey = null;
+      this.settings = null;
       this.loadGoogleMaps();
   }
   
@@ -55,18 +58,29 @@ export class MapPage {
   }
   
   initMap(){
+    let mapEle = document.getElementById('map_canvas');
+    let mapOptions = {
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    this.map = new google.maps.Map(mapEle, mapOptions);
+    
     this.mapInitialised = true;
     let options = {timeout: 10000, enableHighAccuracy: true};
     navigator.geolocation.getCurrentPosition(position => {
       let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-      let mapOptions = {
-        center: latLng,
-        zoom: 15,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
-      this.map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
-      this.addMarker();
+      if(this.map){
+        this.map.setCenter(latLng);
+      }else{
+        let mapOptions = {
+          center: latLng,
+          zoom: 15,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        this.map = new google.maps.Map(mapEle, mapOptions);
+      }
       
+      this.addMarker();
       //hide spinner 
       SpinnerDialog.hide();
     }, (error) => {
@@ -74,6 +88,10 @@ export class MapPage {
       //hide spinner 
       SpinnerDialog.hide();
     }, options);
+    
+    google.maps.event.addListenerOnce(this.map, 'idle', () => {
+      mapEle.classList.add('show-map');
+    });
   }
   
   disableMap(){
@@ -139,4 +157,16 @@ export class MapPage {
     });
   }
 
+  adjustSettings(){
+    console.log('adjust settings on map');
+    let modal = Modal.create(MapSettingsPage, this.settings);
+    this.nav.present(modal);
+
+    modal.onDismiss(data => {
+      if (data) {
+        this.settings = data;
+        console.log('get new map settings' + data)
+      }
+    });
+  }
 }

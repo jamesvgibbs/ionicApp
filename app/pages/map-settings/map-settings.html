@@ -1,0 +1,56 @@
+<ion-toolbar>
+  <ion-buttons start>
+    <button (click)="dismiss()">Cancel</button>
+  </ion-buttons>
+
+  <ion-title>
+    Map Settings
+  </ion-title>
+
+  <ion-buttons end>
+    <button (click)="applyFilters()">Done</button>
+  </ion-buttons>
+</ion-toolbar>
+
+
+<ion-content class="outer-content">
+  <ion-list>
+    <ion-list-header>Map Options</ion-list-header>
+
+    <ion-item>
+      <span item-left class="dot"></span>
+      <ion-label>Active Orders</ion-label>
+      <ion-toggle [(ngModel)]="activeOrders" secondary></ion-toggle>
+    </ion-item>
+    
+    <ion-item>
+      <span item-left class="dot"></span>
+      <ion-label>Styled</ion-label>
+      <ion-toggle [(ngModel)]="styled" secondary></ion-toggle>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>Points</ion-list-header>
+
+    <ion-item *ngFor="#track of tracks" [attr.track]="track.name | lowercase">
+      <span item-left class="dot"></span>
+      <ion-label>{{track.name}}</ion-label>
+      <ion-toggle [(ngModel)]="track.isChecked" secondary></ion-toggle>
+    </ion-item>
+
+  </ion-list>
+  
+  <ion-list>
+    <ion-list-header>Vehicle Types</ion-list-header>
+
+    <ion-item *ngFor="#track of tracks" [attr.track]="track.name | lowercase">
+      <span item-left class="dot"></span>
+      <ion-label>{{track.name}}</ion-label>
+      <ion-toggle [(ngModel)]="track.isChecked" secondary></ion-toggle>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>

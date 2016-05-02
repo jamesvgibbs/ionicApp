@@ -1,0 +1,44 @@
+.about-header {
+  background-color: #434954;
+  padding: 16px;
+  width: 100%;
+  min-height: 150px;
+  text-align: center;
+  
+  img {
+    max-width: 200px;
+    min-height: 115px;
+    margin-left: -15px;
+    padding: 25px 0 20px 0;
+    }
+}
+.about-info{
+    p {
+        color: #697072;
+        text-align: left;
+    }
+    div {
+        padding: 5px;
+        text-align: left;
+        font-size: 1.5rem;
+    }
+    ion-icon {
+        color: color($colors, primary);
+        width: 20px;
+    }
+}
+
+.ios {
+    .about-info {
+        text-align: center;
+    }
+
+    .about-info div {
+        display: inline-block;
+    }
+
+    .about-info ion-icon {
+        width: auto;
+        margin-right: 10px;
+    }
+}
